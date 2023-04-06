@@ -29,7 +29,6 @@ public class MinefieldPanel extends AppPanel {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         super.propertyChange(evt);
-        // TODO handle property changes and special exceptions?
     }
 
 
