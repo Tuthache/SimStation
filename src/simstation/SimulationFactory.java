@@ -5,7 +5,7 @@ import mvc.*;
 public class SimulationFactory implements AppFactory {
 // renamed file to match the name in the RandomWalks sample
 
-    @Override
+    @Override // OVERRIDE THIS IN EXTENSIONS! SEE RandomWalks.java FOR AN EXAMPLE
     public Model makeModel() {
         return new Simulation();
     }
@@ -15,22 +15,21 @@ public class SimulationFactory implements AppFactory {
         return new SimulationView((Simulation)m);
     }
 
-    @Override
+    @Override // OVERRIDE THIS IN EXTENSIONS! SEE RandomWalks.java FOR AN EXAMPLE
     public String getTitle() {
-        // TODO pass through title from implementations?
-        return "SimStation test";
+        return "SimStation";
     }
 
-    @Override
+    @Override // OVERRIDE THIS IN EXTENSIONS!
     public String[] getHelp() {
         // TODO write help
-        return new String[] {"sample", "sample"};
+        return new String[] {"SimStation help text line 1", "SimStation help text line 2"};
     }
 
-    @Override
+    @Override // override this in extensions?
     public String about() {
         // TODO write about
-        return "";
+        return "COPYRIGHT 2023 SimStation Kyle James, Austin Nguyen, Stanley Nguyen, CS151-02";
     }
 
     @Override
