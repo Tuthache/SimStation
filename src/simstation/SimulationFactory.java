@@ -2,7 +2,8 @@ package simstation;
 
 import mvc.*;
 
-public class SimStationFactory implements AppFactory {
+public class SimulationFactory implements AppFactory {
+// renamed file to match the name in the RandomWalks sample
 
     @Override
     public Model makeModel() {
