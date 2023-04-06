@@ -5,7 +5,7 @@ import mvc.*;
 public class SimulationFactory implements AppFactory {
 // renamed file to match the name in the RandomWalks sample
 
-    @Override // OVERRIDE THIS IN EXTENSIONS! SEE RandomWalks.java FOR AN EXAMPLE
+    @Override // OVERRIDE THIS IN EXTENSIONS! SEE RandomWalkSimulation.java FOR AN EXAMPLE
     public Model makeModel() {
         return new Simulation();
     }
@@ -15,7 +15,7 @@ public class SimulationFactory implements AppFactory {
         return new SimulationView((Simulation)m);
     }
 
-    @Override // OVERRIDE THIS IN EXTENSIONS! SEE RandomWalks.java FOR AN EXAMPLE
+    @Override // OVERRIDE THIS IN EXTENSIONS! SEE RandomWalkSimulation.java FOR AN EXAMPLE
     public String getTitle() {
         return "SimStation";
     }
