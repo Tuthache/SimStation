@@ -1,9 +1,5 @@
 package simstation;
 
-import mineField.Heading;
-import mineField.Minefield;
-import mineField.MinefieldView;
-import mineField.MoveCommand;
 import mvc.*;
 
 public class SimStationFactory implements AppFactory {
