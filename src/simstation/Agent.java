@@ -5,5 +5,5 @@ import java.io.Serializable;
 import java.lang.Runnable;
 
 public abstract class Agent implements Serializable, Runnable {
-    // TODO add Agent's variables and methods, remove this
+    // TODO add variables and methods to Agent
 }

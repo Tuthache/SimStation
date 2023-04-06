@@ -1,54 +1,65 @@
 package simstation;
 
 import mineField.Heading;
+import mineField.Minefield;
+import mineField.MinefieldView;
 import mineField.MoveCommand;
 import mvc.*;
 
 public class SimStationFactory implements AppFactory {
-    // TODO add SimStationFactory's variables and methods, remove this
+
+    @Override
     public Model makeModel() {
         return new Simulation();
     }
 
+    @Override
     public View makeView(Model m) {
-        return new SimulationView(m);
+        return new SimulationView((Simulation)m);
     }
 
+    @Override
     public String getTitle() {
-        // TODO pass title through from implementations of SimStation
+        // TODO pass through title from implementations?
+        return "SimStation test";
     }
 
+    @Override
     public String[] getHelp() {
         // TODO write help
+        return new String[] {"sample", "sample"};
     }
 
+    @Override
     public String about() {
         // TODO write about
+        return "";
     }
 
+    @Override
     public String[] getEditCommands() {
         return new String[] {"Start", "Suspend", "Resume", "Stop", "Stats"};
     }
 
+    @Override
     public Command makeEditCommand(Model model, String type, Object source) {
-        // TODO pass model through constructors when needed?
         switch (type) {
-            case "Start": {
-                return new StartCommand();
+            case "Start" -> {
+                return new StartCommand(model);
             }
-            case "Suspend": {
-                return new SuspendCommand();
+            case "Suspend" -> {
+                return new SuspendCommand(model);
             }
-            case "Resume": {
-                return new ResumeCommand();
+            case "Resume" -> {
+                return new ResumeCommand(model);
             }
-            case "Stop": {
-                return new StopCommand();
+            case "Stop" -> {
+                return new StopCommand(model);
             }
-            case "Stats": {
-                return new StatsCommand();
+            case "Stats" -> {
+                return new StatsCommand(model);
             }
-            default: {
+            default -> {
                 return null;
             }
         }
