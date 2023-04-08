@@ -46,7 +46,7 @@ public class Simulation extends Model {
         changed();
     }
 
-    public Agent getNeighbor(Agent a, double radius)
+    public synchronized Agent getNeighbor(Agent a, double radius)
     {
         int xcLowerBound = a.xc - radius;
         int xcUpperBound = a.xc + radius;
