@@ -15,6 +15,15 @@ public class Simulation extends Model {
         clock = 0;
     }
 
+    // agent iterator for view drawing
+    public Iterator<Agent> agentIterator() {
+        return agents.iterator();
+    }
+
+    public int getAgentCount() {
+        return agents.size();
+    }
+
     public void addAgent(Agent a) { agents.add(a); }
 
     public void start()
@@ -95,5 +104,9 @@ public class Simulation extends Model {
             clock++;
             //changed();
         }
+    }
+
+    public int getClock() {
+        return clock;
     }
 }

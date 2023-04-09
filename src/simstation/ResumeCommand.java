@@ -3,5 +3,12 @@ package simstation;
 import mvc.*;
 
 public class ResumeCommand extends Command {
-    // TODO add variables and methods to ResumeCommand
+    public ResumeCommand(Model model) {
+        super(model);
+    }
+
+    public void execute() throws Exception {
+        Simulation simulation = (Simulation)model;
+        simulation.resume();
+    }
 }

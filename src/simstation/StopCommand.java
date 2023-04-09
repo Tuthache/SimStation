@@ -3,5 +3,12 @@ package simstation;
 import mvc.*;
 
 public class StopCommand extends Command {
-    // TODO add variables and methods to StopCommand
+    public StopCommand(Model model) {
+        super(model);
+    }
+
+    public void execute() throws Exception {
+        Simulation simulation = (Simulation)model;
+        simulation.stop();
+    }
 }
