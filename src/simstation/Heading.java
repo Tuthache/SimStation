@@ -13,7 +13,7 @@ public enum Heading {
     NORTHWEST;
 
     public static Heading random(){
-        int num = Utilities.rng.nextInt(8);
+        int num = Utilities.rng.nextInt(8) + 1;
         switch (num){
             case 1: {
                 return NORTH;
