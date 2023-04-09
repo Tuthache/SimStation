@@ -11,7 +11,10 @@ public class Simulation extends Model {
     private int clock;
 
     public Simulation() {
+        super();
         agents = new LinkedList<Agent>();
+        // populate list
+        populate();
         clock = 0;
     }
 
@@ -24,7 +27,13 @@ public class Simulation extends Model {
         return agents.size();
     }
 
-    public void addAgent(Agent a) { agents.add(a); }
+    // Added a bit to randomly place the agent on the grid --Kyle
+    public void addAgent(Agent a) {
+        // TODO un-hardcode rng values for Agents
+        a.xc = Utilities.rng.nextInt(250);
+        a.yc = Utilities.rng.nextInt(250);
+        agents.add(a);
+    }
 
     public void start()
     {
@@ -57,10 +66,10 @@ public class Simulation extends Model {
 
     public synchronized Agent getNeighbor(Agent a, double radius)
     {
-        int xcLowerBound = a.xc - radius;
-        int xcUpperBound = a.xc + radius;
-        int ycLowerBound = a.yc - radius;
-        int ycUpperBound = a.yc + radius;
+        double xcLowerBound = a.xc - radius;
+        double xcUpperBound = a.xc + radius;
+        double ycLowerBound = a.yc - radius;
+        double ycUpperBound = a.yc + radius;
         int start = Utilities.rng.nextInt(agents.size());
         Agent curr = agents.get(start);
         if(curr != a &&
