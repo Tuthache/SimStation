@@ -36,20 +36,23 @@ public abstract class Agent implements Serializable, Runnable {
             try{
                 update();
                 Thread.sleep(20);
+                checkSuspended();
             } catch(InterruptedException e){
                 Utilities.error(e);
             }
         }
     }
     public synchronized void start(){
-        world.populate();
+//        world.populate();
+        myThread = new Thread(this);
+        myThread.start();
     }
     public synchronized void suspend(){
         suspended = true;
     }
     public synchronized boolean isSuspended(){
         return suspended;
-    };
+    }
     public synchronized void resume(){
         notify();
     }
@@ -59,59 +62,91 @@ public abstract class Agent implements Serializable, Runnable {
     public synchronized boolean isStopped(){
         return stopped;
     }
+    private synchronized void checkSuspended() {
+        try {
+            while(!stopped && suspended) {
+                wait();
+                suspended = false;
+            }
+        } catch (InterruptedException e) {
+            Utilities.error(e);
+        }
+    }
+
     public void move(int steps){
+        // TODO un-hardcode values for boundary box
         switch (heading){
             case NORTH: {
                 for (int i = 0; i < steps; i++){
-                    yc--;
-                    world.changed();
+                    if(yc > 0)
+                       yc--;
                 }
+                world.changed();
+                break;
             }
             case NORTHEAST:{
                 for (int i = 0; i < steps; i++){
-                    yc--;
-                    xc++;
-                    world.changed();
+                    if(yc > 0 && xc < 250) {
+                        yc--;
+                        xc++;
+                    }
                 }
+                world.changed();
+                break;
             }
             case EAST:{
                 for (int i = 0; i < steps; i++){
-                    xc++;
-                    world.changed();
+                    if(xc < 250)
+                        xc++;
                 }
+                world.changed();
+                break;
             }
             case SOUTHEAST:{
                 for (int i = 0; i < steps; i++){
-                    xc++;
-                    yc++;
-                    world.changed();
+                    if(xc < 250 && yc < 250) {
+                        xc++;
+                        yc++;
+                    }
                 }
+                world.changed();
+                break;
             }
             case SOUTH:{
                 for (int i = 0; i < steps; i++){
-                    yc++;
-                    world.changed();
+                    if(yc < 250)
+                        yc++;
                 }
+                world.changed();
+                break;
             }
             case SOUTHWEST:{
                 for (int i = 0; i < steps; i++){
-                    yc++;
-                    xc--;
-                    world.changed();
+                    if(xc > 0 && yc < 250) {
+                        yc++;
+                        xc--;
+                    }
                 }
+                world.changed();
+                break;
             }
             case WEST:{
                 for (int i = 0; i < steps; i++){
-                    xc--;
-                    world.changed();
+                    if(xc > 0)
+                        xc--;
                 }
+                world.changed();
+                break;
             }
             case NORTHWEST:{
                 for (int i = 0; i < steps; i++){
-                    yc--;
-                    xc--;
-                    world.changed();
+                    if(xc > 0 && yc > 0) {
+                        yc--;
+                        xc--;
+                    }
                 }
+                world.changed();
+                break;
             }
         }
     }

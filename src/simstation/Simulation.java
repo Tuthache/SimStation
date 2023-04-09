@@ -13,8 +13,6 @@ public class Simulation extends Model {
     public Simulation() {
         super();
         agents = new LinkedList<Agent>();
-        // populate list
-        populate();
         clock = 0;
     }
 
@@ -33,13 +31,19 @@ public class Simulation extends Model {
         a.xc = Utilities.rng.nextInt(250);
         a.yc = Utilities.rng.nextInt(250);
         agents.add(a);
+        a.setWorld(this);
     }
 
     public void start()
     {
         clock = 0;
         startTimer();
-        for(Agent a : agents) { a.start(); }
+        agents.clear();
+        populate();
+        for(int i = 0; i < agents.size(); i++)
+        {
+            agents.get(i).start();
+        }
         changed();
     }
 
