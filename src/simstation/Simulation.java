@@ -5,6 +5,8 @@ import mvc.*;
 
 public class Simulation extends Model {
     private List<Agent> agents;
+    private boolean isRunning;
+    private boolean isSuspended;
 
     // added professor's code below
     private Timer timer;
@@ -14,6 +16,8 @@ public class Simulation extends Model {
         super();
         agents = new LinkedList<Agent>();
         clock = 0;
+        isRunning = false;
+        isSuspended = false;
     }
 
     // agent iterator for view drawing
@@ -23,6 +27,14 @@ public class Simulation extends Model {
 
     public int getAgentCount() {
         return agents.size();
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public boolean isSuspended() {
+        return isSuspended;
     }
 
     // Added a bit to randomly place the agent on the grid --Kyle
@@ -40,10 +52,11 @@ public class Simulation extends Model {
         startTimer();
         agents.clear();
         populate();
-        for(int i = 0; i < agents.size(); i++)
-        {
-            agents.get(i).start();
+        for(Agent a : agents) {
+            a.start();
         }
+        isRunning = true;
+        isSuspended = false;
         changed();
     }
 
@@ -51,6 +64,7 @@ public class Simulation extends Model {
     {
         stopTimer();
         for(Agent a : agents) { a.suspend(); }
+        isSuspended = true;
         changed();
     }
 
@@ -58,6 +72,7 @@ public class Simulation extends Model {
     {
         startTimer();
         for(Agent a : agents) { a.resume(); }
+        isSuspended = false;
         changed();
     }
 
@@ -65,6 +80,8 @@ public class Simulation extends Model {
     {
         stopTimer();
         for(Agent a : agents) { a.stop(); }
+        isRunning = false;
+        isSuspended = false;
         changed();
     }
 

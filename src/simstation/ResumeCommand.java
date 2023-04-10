@@ -9,6 +9,12 @@ public class ResumeCommand extends Command {
 
     public void execute() throws Exception {
         Simulation simulation = (Simulation)model;
-        simulation.resume();
+        if (!simulation.isRunning()) {
+            Utilities.error("The simulation has not started, please start it first");
+        } else if (simulation.isSuspended()) {
+            simulation.resume();
+        } else {
+            Utilities.error("The simulation is already resumed!");
+        }
     }
 }

@@ -9,6 +9,12 @@ public class StartCommand extends Command {
 
     public void execute() throws Exception {
         Simulation simulation = (Simulation)model;
-        simulation.start();
+        if (simulation.isRunning()) {
+            Utilities.error("The simulation is already started, please stop it first");
+        } else {
+            if (!simulation.unsavedChanges || Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
+                simulation.start();
+            }
+        }
     }
 }

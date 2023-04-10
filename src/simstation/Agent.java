@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.lang.Runnable;
 
 public abstract class Agent implements Serializable, Runnable {
-    // TODO add variables and methods to Agent
     protected Simulation world;
     protected String name;
     protected Heading heading;
@@ -16,12 +15,11 @@ public abstract class Agent implements Serializable, Runnable {
     protected Thread myThread;
 
     public Agent(String name){
+        super();
         this.name = name;
-        suspended = false;
-        stopped = false;
-        myThread = null;
     }
-    public Agent(){
+    public Agent() {
+        super();
         suspended = false;
         stopped = false;
         myThread = null;
@@ -32,6 +30,7 @@ public abstract class Agent implements Serializable, Runnable {
 
     public void run(){
         myThread = Thread.currentThread();
+        onStart();
         while(!isStopped()){
             try{
                 update();
@@ -151,4 +150,17 @@ public abstract class Agent implements Serializable, Runnable {
         }
     }
     public abstract void update();
+
+    // required empty methods to be called in run()
+    public void onStart() {
+        // TODO confirm placement of onStart in run
+    }
+
+    public void onInterrupted() {
+        // TODO find correct placement of onInterrupted in run
+    }
+
+    public void onExit() {
+        // TODO find correct placement of onExit in run
+    }
 }
