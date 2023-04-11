@@ -128,7 +128,7 @@ public class AppPanel extends JPanel implements ActionListener, PropertyChangeLi
         cp.add(this);
         frame.setJMenuBar(this.createMenuBar());
         frame.setTitle(factory.getTitle());
-        frame.setSize(500, 300);
+        frame.setSize(World.VIEW_SIZE * 2, World.VIEW_SIZE + 50);
         frame.setVisible(true);
     }
 

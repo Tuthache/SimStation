@@ -89,7 +89,7 @@ public abstract class Agent implements Serializable, Runnable {
             }
             case NORTHEAST:{
                 for (int i = 0; i < steps; i++){
-                    if(yc > 0 && xc < 250) {
+                    if(yc > 0 && xc < World.VIEW_SIZE) { // TODO un-hardcode the upper bound of edge detection?
                         yc--;
                         xc++;
                     }
@@ -99,7 +99,7 @@ public abstract class Agent implements Serializable, Runnable {
             }
             case EAST:{
                 for (int i = 0; i < steps; i++){
-                    if(xc < 250)
+                    if(xc < World.VIEW_SIZE)
                         xc++;
                 }
                 world.changed();
@@ -107,7 +107,7 @@ public abstract class Agent implements Serializable, Runnable {
             }
             case SOUTHEAST:{
                 for (int i = 0; i < steps; i++){
-                    if(xc < 250 && yc < 250) {
+                    if(xc < World.VIEW_SIZE && yc < World.VIEW_SIZE) {
                         xc++;
                         yc++;
                     }
@@ -117,7 +117,7 @@ public abstract class Agent implements Serializable, Runnable {
             }
             case SOUTH:{
                 for (int i = 0; i < steps; i++){
-                    if(yc < 250)
+                    if(yc < World.VIEW_SIZE)
                         yc++;
                 }
                 world.changed();
@@ -125,7 +125,7 @@ public abstract class Agent implements Serializable, Runnable {
             }
             case SOUTHWEST:{
                 for (int i = 0; i < steps; i++){
-                    if(xc > 0 && yc < 250) {
+                    if(xc > 0 && yc < World.VIEW_SIZE) {
                         yc++;
                         xc--;
                     }

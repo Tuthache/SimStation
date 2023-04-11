@@ -39,9 +39,8 @@ public class Simulation extends Model {
 
     // Added a bit to randomly place the agent on the grid --Kyle
     public void addAgent(Agent a) {
-        // TODO un-hardcode rng values for Agents
-        a.xc = Utilities.rng.nextInt(250);
-        a.yc = Utilities.rng.nextInt(250);
+        a.xc = Utilities.rng.nextInt(World.VIEW_SIZE);
+        a.yc = Utilities.rng.nextInt(World.VIEW_SIZE);
         agents.add(a);
         a.setWorld(this);
     }

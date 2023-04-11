@@ -1,21 +1,20 @@
 package simstation;
 
 import mvc.*;
+import java.util.*;
 
 public class StatsCommand extends Command {
     public StatsCommand(Model model) {
         super(model);
     }
 
-    // OVERRIDE THIS IN StatsCommand EXTENSIONS!
+    // OVERRIDE THIS IN StatsCommand EXTENSIONS! and use super() to get the list if using original functionality
     private String[] getStatsMessage() {
         // get specific stats from model
         Simulation simulation = (Simulation)model;
         // create string for inform
-        String[] msg = {
-                "#agents = " + simulation.getAgentCount(),
-                "clock = " + simulation.getClock()};
-        return msg;
+        return new String[]{"#agents = " + simulation.getAgentCount(),
+                            "clock = " + simulation.getClock()};
     }
 
     public void execute() throws Exception {
