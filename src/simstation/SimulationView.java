@@ -37,7 +37,6 @@ public class SimulationView extends View {
             // draw agent
             gc.fillOval(c.xc - centerOffset, c.yc - centerOffset, AGENT_SIZE, AGENT_SIZE);
         }
-        // TODO write this, not doing it yet because Agent isn't written
         gc.setColor(oldColor);
     }
 }
