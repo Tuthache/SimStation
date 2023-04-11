@@ -31,8 +31,8 @@ public abstract class Agent implements Serializable, Runnable {
     public void run(){
         myThread = Thread.currentThread();
         onStart();
-        while(!isStopped()){
-            try{
+        while(!stopped){
+            try {
                 if (suspended){
                     onInterrupted();
                 }
@@ -43,7 +43,7 @@ public abstract class Agent implements Serializable, Runnable {
                 Utilities.error(e);
             }
         }
-        onStop();
+        onExit();
     }
     public synchronized void start(){
 //        world.populate();
@@ -157,14 +157,14 @@ public abstract class Agent implements Serializable, Runnable {
 
     // required empty methods to be called in run()
     public void onStart() {
-        // TODO confirm placement of onStart in run
+
     }
 
     public void onInterrupted() {
-        // TODO find correct placement of onInterrupted in run
+
     }
 
     public void onExit() {
-        // TODO find correct placement of onExit in run
+
     }
 }
