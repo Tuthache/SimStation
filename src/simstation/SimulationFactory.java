@@ -20,15 +20,18 @@ public class SimulationFactory implements AppFactory {
         return "SimStation";
     }
 
-    @Override // OVERRIDE THIS IN EXTENSIONS!
+    @Override // OVERRIDE THIS IN EXTENSIONS?
     public String[] getHelp() {
-        // TODO write help
-        return new String[] {"SimStation help text line 1", "SimStation help text line 2"};
+        return new String[] {
+                "Start: Begins a new simulation",
+                "Suspend: Suspends an active simulation",
+                "Resume: Resumes a suspended simulation",
+                "Stop: Ends a simulation, cannot resume after stopping",
+                "Stats: Displays information from current simulation"};
     }
 
     @Override // override this in extensions?
     public String about() {
-        // TODO write about
         return "COPYRIGHT 2023 SimStation Kyle James, Austin Nguyen, Stanley Nguyen, CS151-02";
     }
 

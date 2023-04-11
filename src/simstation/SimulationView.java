@@ -8,7 +8,7 @@ import java.awt.*;
 public class SimulationView extends View {
 
     // TODO static values
-    private final static int AGENT_SIZE = 10;
+    private final static int AGENT_SIZE = 5;
     private final static Color AGENT_COLOR = Color.WHITE;
     private final static Color BACKGROUND_COLOR = Color.GRAY;
 

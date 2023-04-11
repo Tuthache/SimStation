@@ -11,6 +11,7 @@ public class SimulationPanel extends AppPanel {
     public SimulationPanel(SimulationFactory factory) {
         super(factory);
         String[] strings = new String[]{"Start", "Suspend", "Resume", "Stop", "Stats"};
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
         for (String s : strings) {
             JPanel panel = new JPanel();
             JButton button = new JButton(s);
