@@ -33,9 +33,6 @@ public abstract class Agent implements Serializable, Runnable {
         onStart();
         while(!isStopped()){
             try {
-                if (isSuspended()){
-                    onInterrupted();
-                }
                 update();
                 Thread.sleep(20);
                 checkSuspended();
@@ -68,6 +65,7 @@ public abstract class Agent implements Serializable, Runnable {
     private synchronized void checkSuspended() {
         try {
             while(!stopped && suspended) {
+                onInterrupted();
                 wait();
                 suspended = false;
             }
@@ -77,7 +75,6 @@ public abstract class Agent implements Serializable, Runnable {
     }
 
     public void move(int steps){
-        // TODO un-hardcode values for boundary box
         switch (heading){
             case NORTH: {
                 for (int i = 0; i < steps; i++){
@@ -89,7 +86,7 @@ public abstract class Agent implements Serializable, Runnable {
             }
             case NORTHEAST:{
                 for (int i = 0; i < steps; i++){
-                    if(yc > 0 && xc < World.VIEW_SIZE) { // TODO un-hardcode the upper bound of edge detection?
+                    if(yc > 0 && xc < World.VIEW_SIZE) {
                         yc--;
                         xc++;
                     }
@@ -157,14 +154,14 @@ public abstract class Agent implements Serializable, Runnable {
 
     // required empty methods to be called in run()
     public void onStart() {
-
+        // override me when needed
     }
 
     public void onInterrupted() {
-
+        // override me when needed
     }
 
     public void onExit() {
-
+        // override me when needed
     }
 }
