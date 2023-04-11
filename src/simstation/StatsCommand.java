@@ -7,13 +7,19 @@ public class StatsCommand extends Command {
         super(model);
     }
 
-    public void execute() throws Exception {
+    // OVERRIDE THIS IN StatsCommand EXTENSIONS!
+    private String[] getStatsMessage() {
         // get specific stats from model
         Simulation simulation = (Simulation)model;
         // create string for inform
-        String[] statsMessage = {"#agents = " + simulation.getAgentCount(),
-                                 "clock = " + simulation.getClock()};
+        String[] msg = {
+                "#agents = " + simulation.getAgentCount(),
+                "clock = " + simulation.getClock()};
+        return msg;
+    }
+
+    public void execute() throws Exception {
         // send message
-        Utilities.inform(statsMessage);
+        Utilities.inform(getStatsMessage());
     }
 }
