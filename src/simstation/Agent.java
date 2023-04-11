@@ -33,6 +33,9 @@ public abstract class Agent implements Serializable, Runnable {
         onStart();
         while(!isStopped()){
             try{
+                if (suspended){
+                    onInterrupted();
+                }
                 update();
                 Thread.sleep(20);
                 checkSuspended();
@@ -40,6 +43,7 @@ public abstract class Agent implements Serializable, Runnable {
                 Utilities.error(e);
             }
         }
+        onStop();
     }
     public synchronized void start(){
 //        world.populate();
