@@ -9,12 +9,12 @@ public class SimulationView extends View {
 
     // TODO static values
     private final static int AGENT_SIZE = 5;
-    private final static Color AGENT_COLOR = Color.WHITE;
-    private final static Color BACKGROUND_COLOR = Color.GRAY;
+    private Color agentColor = Color.WHITE;
+    private Color backgroundColor = Color.GRAY;
 
     public SimulationView(Model model) {
         super(model);
-        this.setBackground(BACKGROUND_COLOR);
+        this.setBackground(backgroundColor);
     }
 
     public void paintComponent(Graphics gc) {
@@ -29,7 +29,7 @@ public class SimulationView extends View {
         // get agent iterator
         Iterator<Agent> it = simulation.agentIterator();
         // get agent color
-        gc.setColor(AGENT_COLOR);
+        gc.setColor(agentColor);
         // draw a circle for every agent centered on the agent's x and y
         int centerOffset = AGENT_SIZE / 2;
         while (it.hasNext()) {
