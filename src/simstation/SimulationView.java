@@ -20,6 +20,10 @@ public class SimulationView extends View {
     public void paintComponent(Graphics gc) {
         super.paintComponent(gc);
         Color oldColor = gc.getColor();
+
+        // draw bounds for agents
+        gc.setColor(Color.BLACK);
+        gc.drawRect(0,0, World.VIEW_SIZE, World.VIEW_SIZE);
         // default drawing: draw all agents
         Simulation simulation = (Simulation)model;
         // get agent iterator
