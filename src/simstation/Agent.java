@@ -31,9 +31,9 @@ public abstract class Agent implements Serializable, Runnable {
     public void run(){
         myThread = Thread.currentThread();
         onStart();
-        while(!stopped){
+        while(!isStopped()){
             try {
-                if (suspended){
+                if (isSuspended()){
                     onInterrupted();
                 }
                 update();
