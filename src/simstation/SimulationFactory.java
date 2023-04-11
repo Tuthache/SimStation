@@ -56,11 +56,16 @@ public class SimulationFactory implements AppFactory {
                 return new StopCommand(model);
             }
             case "Stats" -> {
-                return new StatsCommand(model);
+                return statsCommand(model);
             }
             default -> {
                 return null;
             }
         }
+    }
+
+    // OVERRIDE THIS IN FACTORY TO CUSTOMIZE STATS MESSAGE
+    private StatsCommand statsCommand(Model m) {
+        return new StatsCommand(m);
     }
 }
