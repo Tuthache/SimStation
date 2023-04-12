@@ -90,29 +90,15 @@ public class Simulation extends Model {
         double xcUpperBound = a.xc + radius;
         double ycLowerBound = a.yc - radius;
         double ycUpperBound = a.yc + radius;
-        int start = Utilities.rng.nextInt(agents.size());
-        Agent curr = agents.get(start);
-        if(curr != a &&
-                curr.xc >= xcLowerBound && curr.xc <= xcUpperBound &&
-                curr.yc >= ycLowerBound && curr.yc <= ycUpperBound)
+
+        for(Agent ag : agents)
         {
-            return curr;
+            if(ag != a &&
+                    ag.xc >= xcLowerBound && ag.xc <= xcUpperBound &&
+                    ag.yc >= ycLowerBound && ag.yc <= ycUpperBound)
+            { return ag; }
         }
 
-        // loop through agents until return to random starting point
-        for(int i = start+1; i != start; i++)
-        {
-            curr = agents.get(i);
-            if(curr != a &&
-                    curr.xc >= xcLowerBound && curr.xc <= xcUpperBound &&
-                    curr.yc >= ycLowerBound && curr.yc <= ycUpperBound)
-            {
-                return curr;
-            }
-
-            // index wraps back to the beginning
-            if(i == agents.size()-1) i = 0;
-        }
         return null;
     }
 
