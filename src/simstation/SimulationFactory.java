@@ -65,7 +65,7 @@ public class SimulationFactory implements AppFactory {
     }
 
     // OVERRIDE THIS IN FACTORY TO CUSTOMIZE STATS MESSAGE
-    private StatsCommand statsCommand(Model m) {
+    protected StatsCommand statsCommand(Model m) {
         return new StatsCommand(m);
     }
 }

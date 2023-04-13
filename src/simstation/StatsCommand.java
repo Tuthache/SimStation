@@ -9,7 +9,7 @@ public class StatsCommand extends Command {
     }
 
     // OVERRIDE THIS IN StatsCommand EXTENSIONS! and use super() to get the list if using original functionality
-    private String[] getStatsMessage() {
+    protected String[] getStatsMessage() {
         // get specific stats from model
         Simulation simulation = (Simulation)model;
         // create string for inform

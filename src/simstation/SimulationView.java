@@ -8,23 +8,16 @@ import java.awt.*;
 public class SimulationView extends View {
 
     // TODO static values
-    private final static int AGENT_SIZE = 5;
-    private Color agentColor = Color.WHITE;
-    private Color backgroundColor = Color.GRAY;
+    protected final static int AGENT_SIZE = 5;
+    protected Color agentColor = Color.WHITE;
+    protected Color backgroundColor = Color.GRAY;
 
     public SimulationView(Model model) {
         super(model);
         this.setBackground(backgroundColor);
     }
 
-    public void paintComponent(Graphics gc) {
-        super.paintComponent(gc);
-        Color oldColor = gc.getColor();
-
-        // draw bounds for agents
-        gc.setColor(Color.BLACK);
-        gc.drawRect(0,0, World.VIEW_SIZE, World.VIEW_SIZE);
-        // default drawing: draw all agents
+    protected void drawAgents(Graphics gc) {
         Simulation simulation = (Simulation)model;
         // get agent iterator
         Iterator<Agent> it = simulation.agentIterator();
@@ -37,6 +30,18 @@ public class SimulationView extends View {
             // draw agent
             gc.fillOval(c.xc - centerOffset, c.yc - centerOffset, AGENT_SIZE, AGENT_SIZE);
         }
+    }
+
+    public void paintComponent(Graphics gc) {
+        super.paintComponent(gc);
+        Color oldColor = gc.getColor();
+
+        // draw bounds for agents
+        gc.setColor(Color.BLACK);
+        gc.drawRect(0,0, World.VIEW_SIZE, World.VIEW_SIZE);
+        // default drawing: draw all agents
+        drawAgents(gc);
+
         gc.setColor(oldColor);
     }
 }
