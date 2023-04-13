@@ -15,11 +15,8 @@ public abstract class Agent implements Serializable, Runnable {
     protected Thread myThread;
 
     public Agent(String name){
-        super();
+        this(); // calls empty constructor
         this.name = name;
-        suspended = false;
-        stopped = false;
-        myThread = null;
     }
     public Agent() {
         super();
