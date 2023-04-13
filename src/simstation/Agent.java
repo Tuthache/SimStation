@@ -12,7 +12,7 @@ public abstract class Agent implements Serializable, Runnable {
     public int yc;
     private boolean suspended;
     private boolean stopped;
-    protected Thread myThread;
+    transient protected Thread myThread;
 
     public Agent(String name){
         this(); // calls empty constructor
@@ -77,88 +77,104 @@ public abstract class Agent implements Serializable, Runnable {
     public void move(int steps){
         int xTemp, yTemp;
         switch (heading){
-            case NORTH:{
-                yc = (yc - steps % World.VIEW_SIZE + World.VIEW_SIZE) % World.VIEW_SIZE;
-                world.changed();
+            case NORTH: {
+                for (int i = 0; i < steps; i++) {
+                    yc = ((yc - 1) % World.VIEW_SIZE + World.VIEW_SIZE) % World.VIEW_SIZE;
+                    world.changed();
+                }
                 break;
             }
             case NORTHEAST:{
-                yc -= steps;
-                xc += steps;
-                if(yc < 0) {
-                    xTemp = xc;
-                    xc = Math.abs((yc % World.VIEW_SIZE) % World.VIEW_SIZE);
-                    yc = Math.abs(xTemp-xc+yc);
+                for(int i = 0; i < steps; i++) {
+                    yc--;
+                    xc++;
+                    if (yc < 0) {
+                        xTemp = xc;
+                        xc = Math.abs((yc % World.VIEW_SIZE) % World.VIEW_SIZE);
+                        yc = Math.abs(xTemp - xc + yc);
+                    }
+                    if (xc > World.VIEW_SIZE) {
+                        yTemp = yc;
+                        yc = World.VIEW_SIZE - (xc % World.VIEW_SIZE);
+                        xc = xc - (yc - yTemp);
+                    }
+                    world.changed();
                 }
-                if(xc > World.VIEW_SIZE) {
-                    yTemp = yc;
-                    yc = World.VIEW_SIZE - (xc % World.VIEW_SIZE);
-                    xc = xc - (yc - yTemp);
-                }
-                world.changed();
                 break;
             }
             case EAST:{
-                xc = (xc + steps % World.VIEW_SIZE) % World.VIEW_SIZE;
-                world.changed();
+                for(int i = 0; i < steps; i++) {
+                    xc = ((xc + 1) % World.VIEW_SIZE) % World.VIEW_SIZE;
+                    world.changed();
+                }
                 break;
             }
             case SOUTHEAST:{
-                xc += steps;
-                yc += steps;
-                if(xc > World.VIEW_SIZE) {
-                    yTemp = yc;
-                    yc = (xc % World.VIEW_SIZE) % World.VIEW_SIZE;
-                    xc = xc - yTemp + yc;
+                for(int i = 0; i < steps; i++) {
+                    xc++;
+                    yc++;
+                    if (xc > World.VIEW_SIZE) {
+                        yTemp = yc;
+                        yc = (xc % World.VIEW_SIZE) % World.VIEW_SIZE;
+                        xc = xc - yTemp + yc;
+                    }
+                    if (yc > World.VIEW_SIZE) {
+                        xTemp = xc;
+                        xc = (yc % World.VIEW_SIZE) % World.VIEW_SIZE;
+                        yc = yc - xTemp + xc;
+                    }
+                    world.changed();
                 }
-                if(yc > World.VIEW_SIZE) {
-                    xTemp = xc;
-                    xc = (yc % World.VIEW_SIZE) % World.VIEW_SIZE;
-                    yc = yc - xTemp + xc;
-                }
-                world.changed();
                 break;
             }
             case SOUTH:{
-                yc = (yc + steps % World.VIEW_SIZE) % World.VIEW_SIZE;
-                world.changed();
+                for(int i = 0; i < steps; i++) {
+                    yc = ((yc + 1) % World.VIEW_SIZE) % World.VIEW_SIZE;
+                    world.changed();
+                }
                 break;
             }
             case SOUTHWEST:{
-                xc -= steps;
-                yc += steps;
-                if(yc > World.VIEW_SIZE) {
-                    xTemp = xc;
-                    xc = World.VIEW_SIZE - ((yc % World.VIEW_SIZE) % World.VIEW_SIZE);
-                    yc = yc-(xc-xTemp);
+                for(int i = 0; i < steps; i++) {
+                    xc--;
+                    yc++;
+                    if (yc > World.VIEW_SIZE) {
+                        xTemp = xc;
+                        xc = World.VIEW_SIZE - ((yc % World.VIEW_SIZE) % World.VIEW_SIZE);
+                        yc = yc - (xc - xTemp);
+                    }
+                    if (xc < 0) {
+                        yTemp = yc;
+                        yc = Math.abs(xc);
+                        xc = xc + (yTemp - yc);
+                    }
+                    world.changed();
                 }
-                if(xc < 0) {
-                    yTemp = yc;
-                    yc = Math.abs(xc);
-                    xc = xc + (yTemp - yc);
-                }
-                world.changed();
                 break;
             }
             case WEST:{
-                xc = (xc - steps % World.VIEW_SIZE + World.VIEW_SIZE) % World.VIEW_SIZE;
-                world.changed();
+                for(int i = 0; i < steps; i++) {
+                    xc = ((xc - 1) % World.VIEW_SIZE + World.VIEW_SIZE) % World.VIEW_SIZE;
+                    world.changed();
+                }
                 break;
             }
             case NORTHWEST:{
-                yc -= steps;
-                xc -= steps;
-                if(xc < 0) {
-                    yTemp = yc;
-                    yc = World.VIEW_SIZE + xc;
-                    xc = xc - (yTemp - yc);
+                for(int i = 0; i < steps; i++) {
+                    yc--;
+                    xc--;
+                    if (xc < 0) {
+                        yTemp = yc;
+                        yc = World.VIEW_SIZE + xc;
+                        xc = xc - (yTemp - yc);
+                    }
+                    if (yc < 0) {
+                        xTemp = xc;
+                        xc = World.VIEW_SIZE - yc;
+                        yc = yc + (xc - xTemp);
+                    }
+                    world.changed();
                 }
-                if(yc < 0) {
-                    xTemp = xc;
-                    xc = World.VIEW_SIZE - yc;
-                    yc = yc + (xc - xTemp);
-                }
-                world.changed();
                 break;
             }
         }
