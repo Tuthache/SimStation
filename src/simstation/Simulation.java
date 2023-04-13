@@ -9,7 +9,7 @@ public class Simulation extends Model {
     private boolean isSuspended;
 
     // added professor's code below
-    private Timer timer;
+    transient private Timer timer;
     private int clock;
 
     public Simulation() {
