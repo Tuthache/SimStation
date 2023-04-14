@@ -12,16 +12,16 @@ public class PlagueSimulation extends Simulation {
             addAgent(new Person());
         }
     }
-    public int getPercentInfected(){
+    public double getPercentInfected(){
         Iterator<Agent> people = this.agentIterator();
-        int numInfected = 0;
+        double numInfected = 0;
         while(people.hasNext()){
             Person p = (Person)people.next();
             if (p.getInfected()){
                 numInfected++;
             }
         }
-        return numInfected / POPULATION;
+        return (numInfected / POPULATION) * 100;
     }
     public static void main(String[] args){
         AppPanel panel = new SimulationPanel(new PlagueFactory());

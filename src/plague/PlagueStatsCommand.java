@@ -9,7 +9,7 @@ public class PlagueStatsCommand extends StatsCommand {
     }
     public String[] getStatsMessage(){
         PlagueSimulation plague = (PlagueSimulation) model;
-        int infectedRatio = plague.getPercentInfected();
+        double infectedRatio = plague.getPercentInfected();
         return new String[] {
                 "#agents = " + plague.POPULATION,
                 "clock = " + plague.getClock(),
