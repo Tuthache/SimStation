@@ -14,14 +14,14 @@ public class PlagueSimulation extends Simulation {
     }
     public int getPercentInfected(){
         Iterator<Agent> people = this.agentIterator();
-        int infected = 0;
+        int numInfected = 0;
         while(people.hasNext()){
             Person p = (Person)people.next();
             if (p.getInfected()){
-                infected++;
+                numInfected++;
             }
         }
-        return infected / POPULATION;
+        return numInfected / POPULATION;
     }
     public static void main(String[] args){
         AppPanel panel = new SimulationPanel(new PlagueFactory());

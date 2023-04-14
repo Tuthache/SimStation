@@ -6,14 +6,14 @@ import simstation.*;
 public class Person extends Agent{
     private static final int RESISTANCE = 5;
     private static final int VIRULENCE = 50;
-    private static final int STARTING_INFECTED_RATE = 5;
+    private static final int STARTING_INFECTED_RATE = 3;
     private boolean infected;
     public boolean getInfected(){
         return infected;
     }
     public Person(){
         int startingInfected = Utilities.rng.nextInt(10) + 1;
-        if (startingInfected > STARTING_INFECTED_RATE){
+        if (startingInfected < STARTING_INFECTED_RATE){
             infected = true;
         } else {
             infected = false;
@@ -29,7 +29,7 @@ public class Person extends Agent{
             //During process of getting infected, if resist > RESISTANCE person does not get infected
             int resist = Utilities.rng.nextInt(100) + 1;
 
-            if (neighbor.getInfected()){
+            if (neighbor.getInfected() && !this.getInfected()){
                 if (infection > VIRULENCE){
                     this.infected = true;
                     if (resist > RESISTANCE){
